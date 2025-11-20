@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KRYONIS Pulse – Live Block</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* --- KRYONIS CORE PALETTE --- */
+    :root {
+      --kryonis-deep-blue: #0A1B2E;
+      --kryonis-cyan: #11C7F5;
+      --kryonis-obsidian: #00070D;
+      --kryonis-white: #F3F7F9;
+      --kryonis-gold: #E5C46A;
+      --kryonis-violet: #8E5BFF;
+      --kryonis-red: #FF3A53;
+      --kryonis-graphite: #1D1F22;
+      --kryonis-steel: #A8B3C2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+        sans-serif;
+      background: radial-gradient(circle at top, #07111d 0, #00070d 50%, #000 100%);
+      color: var(--kryonis-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .pulse-live-block {
+      width: 100%;
+      max-width: 420px;
+      padding: 22px 22px 20px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(17,199,245,0.16), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(142,91,255,0.18), transparent 55%),
+        linear-gradient(145deg,#071524,#020911);
+      border: 1px solid rgba(17,199,245,0.22);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.75);
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .pulse-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(168,179,194,0.9);
+    }
+
+    .pulse-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--kryonis-white);
+      margin-top: 3px;
+    }
+
+    .pulse-ring {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 3px solid var(--kryonis-cyan);
+      position: relative;
+      animation: ring-spin 10s linear infinite;
+    }
+
+    .pulse-ring::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: inherit;
+      border: 2px solid rgba(243,247,249,0.1);
+    }
+
+    .pulse-ring::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--kryonis-cyan);
+      box-shadow: 0 0 12px rgba(17,199,245,0.8);
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes ring-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .pulse-main {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .pulse-main-text {
+      margin-left: 14px;
+    }
+
+    .pulse-main-label {
+      font-size: 12px;
+      color: rgba(168,179,194,0.9);
+    }
+
+    .pulse-main-climate {
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    .pulse-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .pulse-metric {
+      background: rgba(10,27,46,0.85);
+      border-radius: 14px;
+      padding: 8px 6px 9px;
+      text-align: center;
+      border: 1px solid rgba(17,199,245,0.12);
+    }
+
+    .pulse-metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: rgba(168,179,194,0.88);
+      margin-bottom: 4px;
+    }
+
+    .pulse-metric-value {
+      font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, monospace;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .metric-res { color: var(--kryonis-cyan); }
+    .metric-delta { color: var(--kryonis-violet); }
+    .metric-align { color: var(--kryonis-gold); }
+
+    .pulse-footer-text {
+      font-size: 12px;
+      color: rgba(168,179,194,0.96);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .pulse-footer-text span {
+      color: var(--kryonis-cyan);
+      font-weight: 500;
+    }
+
+    .pulse-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 0;
+      border-radius: 999px;
+      text-decoration: none;
+      background: linear-gradient(135deg,#11C7F5,#8E5BFF);
+      color: #00070D;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .pulse-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.7);
+      filter: brightness(1.05);
+    }
+
+    .pulse-cta:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pulse-live-block">
+    <!-- HEADER -->
+    <div class="pulse-header">
+      <div>
+        <div class="pulse-eyebrow">KRYONIS · LIVE FIELD</div>
+        <div class="pulse-title">Pulse Resonance Snapshot</div>
+      </div>
+      <div id="pulseRing" class="pulse-ring"></div>
+    </div>
+
+    <!-- MAIN CLIMATE -->
+    <div class="pulse-main">
+      <div class="pulse-main-text">
+        <div class="pulse-main-label">Internal climate</div>
+        <div id="climateText" class="pulse-main-climate">
+          Loading KRYONIS field…
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="pulse-metrics">
+      <div class="pulse-metric">
+        <div class="pulse-metric-label">Resonance</div>
+        <div id="resValue" class="pulse-metric-value metric-res">—</div>
+      </div>
+      <div class="pulse-metric">
+        <div class="pulse-metric-label">Coherence Δ</div>
+        <div id="deltaValue" class="pulse-metric-value metric-delta">—</div>
+      </div>
+      <div class="pulse-metric">
+        <div class="pulse-metric-label">Alignment</div>
+        <div id="alignValue" class="pulse-metric-value metric-align">—</div>
+      </div>
+    </div>
+
+    <!-- FOOTER TEXT -->
+    <div id="summaryText" class="pulse-footer-text">
+      Waiting for the first resonance signal…
+    </div>
+
+    <!-- CTA -->
+    <a href="https://portal.kryonis.global" class="pulse-cta">
+      Open Full KRYONIS Pulse Dashboard
+    </a>
+  </div>
+
+  <script>
+    // --- CONFIG ---
+    const USE_MOCK = true; // pane hiljem false, kui päris API on olemas
+    const API_URL = "https://kryonis-portal.onrender.com/api/pulse/status";
+
+    async function fetchPulseData() {
+      if (USE_MOCK) {
+        // MOCK ANDMED – töötab kohe, ka ilma backendita
+        return {
+          resonanceScore: 84,
+          coherenceDelta: 3,
+          intentAlignment: 76,
+          climateText: "calm, clear, future-oriented"
+        };
+      }
+
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Pulse API error");
+      return await res.json();
+    }
+
+    function updateRingColor(score) {
+      const ring = document.getElementById("pulseRing");
+      if (!ring) return;
+      let color = "#8E5BFF"; // default – violetne
+
+      if (score > 75) color = "#11C7F5";        // kõrge koherents
+      else if (score < 40) color = "#FF3A53";   // turbulents
+
+      ring.style.borderColor = color;
+    }
+
+    async function loadPulse() {
+      try {
+        const data = await fetchPulseData();
+
+        document.getElementById("climateText").textContent =
+          data.climateText || "stable, reflective, aligned";
+
+        document.getElementById("resValue").textContent =
+          (data.resonanceScore ?? 0) + "%";
+
+        const delta = data.coherenceDelta ?? 0;
+        const deltaText = (delta > 0 ? "↑ " : delta < 0 ? "↓ " : "· ") +
+                          Math.abs(delta) + "%";
+        document.getElementById("deltaValue").textContent = deltaText;
+
+        document.getElementById("alignValue").textContent =
+          (data.intentAlignment ?? 0) + "%";
+
+        document.getElementById("summaryText").innerHTML =
+          `Today the KRYONIS field is <span>${data.climateText}</span>.`;
+
+        updateRingColor(data.resonanceScore ?? 0);
+      } catch (e) {
+        console.error(e);
+        document.getElementById("summaryText").textContent =
+          "Pulse stream temporarily unavailable.";
+      }
+    }
+
+    loadPulse();
+    setInterval(loadPulse, 60000); // uuenda iga 60 sekundi järel
+  </script>
+</body>
+</html>
