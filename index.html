@@ -14,7 +14,6 @@
       --muted: #9da1b2;
       --accent-gold: #f6c56c;
       --accent-gold-soft: rgba(246, 197, 108, 0.12);
-      --accent-iris: #6d6bff;
       --border: #232735;
       --radius-lg: 26px;
       --radius-pill: 999px;
@@ -336,7 +335,7 @@
       }
     }
 
-    /* PORTAL SNAPSHOT CARD */
+    /* SECTIONS */
 
     .section {
       width: 100%;
@@ -421,6 +420,15 @@
       color: rgba(244, 197, 108, 0.85);
     }
 
+    .placeholder {
+      margin-top: 24px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.8;
+    }
+
     /* FOOTER */
 
     footer {
@@ -473,17 +481,18 @@
       </div>
 
       <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#">GLOBAL</a>
-        <a class="nav-link" href="#">STUDIO</a>
-        <a class="nav-link active" href="#">PORTAL</a>
-        <a class="btn btn-outline nav-cta" href="#request-access">Request access</a>
+        <!-- Needid kerivad allolevatesse plokkidesse -->
+        <a class="nav-link" href="#global">GLOBAL</a>
+        <a class="nav-link" href="#studio">STUDIO</a>
+        <a class="nav-link active" href="#portal">PORTAL</a>
+        <a class="btn btn-outline nav-cta" href="#access">Request access</a>
       </nav>
     </header>
 
     <main>
       <div class="content">
-        <!-- HERO -->
-        <section class="hero" aria-labelledby="portal-hero-title">
+        <!-- HERO / PORTAL -->
+        <section class="hero" id="portal" aria-labelledby="portal-hero-title">
           <div class="hero-kicker">Sovereign Operations Interface</div>
           <h1 class="hero-title" id="portal-hero-title">
             KRYONIS<br />
@@ -498,10 +507,11 @@
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-gold" id="enter-portal" href="#enter-portal">
+            <!-- Praegu kerib allapoole; hiljem saab webmaster siia päris URL-id panna -->
+            <a class="btn btn-gold" href="#portal-snapshot">
               Enter KRYONIS PORTAL
             </a>
-            <a class="btn btn-outline" id="request-access" href="#request-access">
+            <a class="btn btn-outline" id="access" href="#global-access">
               Request a sovereign account
             </a>
           </div>
@@ -516,7 +526,7 @@
       </div>
 
       <!-- PORTAL SNAPSHOT -->
-      <section class="section">
+      <section class="section" id="portal-snapshot">
         <div class="section-heading">PORTAL SNAPSHOT</div>
         <article class="card" aria-labelledby="portal-snapshot-title">
           <header class="card-header">
@@ -544,6 +554,25 @@
             </div>
           </div>
         </article>
+      </section>
+
+      <!-- GLOBAL & STUDIO placeholder plokid, kuhu hiljem tulevad päris alalehed -->
+      <section class="section" id="global">
+        <div class="placeholder">
+          GLOBAL INTERFACE · Coming online with KRYONIS Phase II.
+        </div>
+      </section>
+
+      <section class="section" id="studio">
+        <div class="placeholder">
+          STUDIO INTERFACE · Dedicated environment for narrative &amp; media operations.
+        </div>
+      </section>
+
+      <section class="section" id="global-access">
+        <div class="placeholder">
+          SOVEREIGN ACCOUNT ONBOARDING · This block will be wired to operations backend.
+        </div>
       </section>
     </main>
 
