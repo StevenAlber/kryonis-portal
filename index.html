@@ -16,7 +16,7 @@
       --accent-gold-soft: rgba(246, 197, 108, 0.12);
       --accent-iris: #6d6bff;
       --border: #232735;
-      --radius-lg: 24px;
+      --radius-lg: 26px;
       --radius-pill: 999px;
       --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.85);
       --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.6);
@@ -51,12 +51,12 @@
       max-width: 1280px;
       display: flex;
       flex-direction: column;
-      padding: 16px 16px 32px;
+      padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 32px;
     }
 
     @media (min-width: 768px) {
       .page {
-        padding: 28px 32px 40px;
+        padding: calc(env(safe-area-inset-top, 0px) + 16px) 32px 40px;
       }
     }
 
@@ -66,7 +66,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 4px 20px;
+      padding-bottom: 20px;
     }
 
     .brand {
@@ -77,23 +77,26 @@
 
     .brand-mark {
       width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #2cf5ff 0, #002a3a 40%, #05060a 100%);
-      border: 1px solid rgba(135, 206, 255, 0.5);
+      height: 34px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 20%, #e6ffff 0, #2cf5ff 12%, transparent 40%),
+        radial-gradient(circle at 50% 80%, #00ffd5 0, transparent 45%),
+        radial-gradient(circle at 50% 50%, #001e2b 0, #02060f 65%, #000 100%);
       box-shadow:
-        0 0 0 1px rgba(0, 255, 255, 0.1),
-        0 0 40px rgba(0, 255, 213, 0.4);
+        0 0 18px rgba(0, 255, 213, 0.7),
+        0 0 40px rgba(0, 145, 255, 0.55);
+      border: 1px solid rgba(110, 189, 255, 0.7);
       position: relative;
     }
 
     .brand-mark::after {
       content: "";
       position: absolute;
-      inset: 7px;
+      inset: 5px;
       border-radius: inherit;
-      border: 1px solid rgba(5, 245, 255, 0.6);
-      opacity: 0.9;
+      border: 1px solid rgba(113, 229, 255, 0.7);
+      opacity: 0.85;
     }
 
     .brand-text-main {
@@ -106,7 +109,7 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 22px;
       font-size: 13px;
     }
 
@@ -115,7 +118,7 @@
       padding-bottom: 4px;
       color: var(--muted);
       text-decoration: none;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
@@ -217,7 +220,7 @@
       border-radius: var(--radius-lg);
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow-soft);
-      padding: 22px 18px 22px;
+      padding: 22px 18px 24px;
       position: relative;
       overflow: hidden;
     }
@@ -262,7 +265,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .hero-meta {
@@ -297,9 +300,9 @@
     .hero-orbit {
       position: absolute;
       right: -40px;
-      bottom: -50px;
-      width: 220px;
-      height: 220px;
+      bottom: -55px;
+      width: 230px;
+      height: 230px;
       border-radius: 50%;
       border: 1px solid rgba(109, 107, 255, 0.35);
       box-shadow: 0 0 120px rgba(109, 107, 255, 0.45);
@@ -329,7 +332,7 @@
       .hero-orbit {
         opacity: 0.25;
         right: -80px;
-        bottom: -72px;
+        bottom: -80px;
       }
     }
 
@@ -346,7 +349,7 @@
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin: 16px 4px 10px;
     }
 
     .card {
@@ -470,9 +473,9 @@
       </div>
 
       <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#">Global</a>
-        <a class="nav-link" href="#">Studio</a>
-        <a class="nav-link active" href="#">Portal</a>
+        <a class="nav-link" href="#">GLOBAL</a>
+        <a class="nav-link" href="#">STUDIO</a>
+        <a class="nav-link active" href="#">PORTAL</a>
         <a class="btn btn-outline nav-cta" href="#request-access">Request access</a>
       </nav>
     </header>
@@ -512,13 +515,13 @@
         </section>
       </div>
 
-      <!-- PORTAL SNAPSHOT (tekstikaart, mitte live Pulse) -->
+      <!-- PORTAL SNAPSHOT -->
       <section class="section">
-        <div class="section-heading">Portal Snapshot</div>
+        <div class="section-heading">PORTAL SNAPSHOT</div>
         <article class="card" aria-labelledby="portal-snapshot-title">
           <header class="card-header">
-            <h2 class="card-title" id="portal-snapshot-title">Role &amp; scope</h2>
-            <div class="card-tag">Front-line interface</div>
+            <h2 class="card-title" id="portal-snapshot-title">ROLE &amp; SCOPE</h2>
+            <div class="card-tag">FRONT-LINE INTERFACE</div>
           </header>
           <div class="card-body">
             <p>
