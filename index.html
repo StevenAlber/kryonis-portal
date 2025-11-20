@@ -424,10 +424,10 @@
               </p>
               <div class="hero-actions">
                 <!-- TODO: Replace href with your live portal app URL if different -->
-                <a class="btn btn-gold" href="https://portal.kryonis.global/">
+                <a class="btn-solid" href="https://portal.kryonis.global/">
                   Enter KRYONIS PORTAL
                 </a>
-                <a class="btn btn-outline" href="#access">
+                <a class="btn-ghost" href="#access">
                   Request a sovereign account
                 </a>
               </div>
@@ -647,6 +647,34 @@
         </div>
       </section>
 
+      <!-- PULSE LIVE SECTION -->
+      <section id="pulse-live">
+        <div class="wrapper">
+          <div class="section-heading">
+            <div class="section-eyebrow">LIVE FIELD</div>
+            <h2 class="section-title">KRYONIS Pulse — Live resonance snapshot</h2>
+            <p class="section-lead">
+              A real-time view of the current resonance field inside the KRYONIS ecosystem.
+            </p>
+          </div>
+          <div style="max-width: 420px; margin: 2.5rem auto 0;">
+            <iframe
+              src="pulse-live.html"
+              style="
+                width: 100%;
+                height: 420px;
+                border: none;
+                border-radius: 22px;
+                overflow: hidden;
+                background: transparent;
+                display: block;
+              "
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -671,20 +699,13 @@
       </div>
     </footer>
 
-<!-- KRYONIS PULSE LIVE BLOCK -->
-<div style="max-width: 420px; margin: 60px auto;">
-  <iframe
-    src="pulse-live.html"
-    style="width: 100%; height: 320px; border: none; border-radius: 20px; overflow: hidden;"
-    loading="lazy">
-  </iframe>
-</div>
+  </div>
 
-<!-- Always start at top on refresh -->
-<script>
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
-};
-</script>
+  <!-- Always start at top on refresh -->
+  <script>
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+  </script>
 </body>
 </html>
