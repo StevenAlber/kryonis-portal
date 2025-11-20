@@ -4,708 +4,561 @@
   <meta charset="UTF-8" />
   <title>KRYONIS PORTAL — Sovereign Operations Interface</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="KRYONIS PORTAL — the sovereign interface to the KRYONIS ecosystem: Pulse, Analytics, LETHE, PX-Δ1, ΔX Tracker, INTENTEX and more." />
+  <meta name="description" content="KRYONIS PORTAL — sovereign operations interface for the KRYONIS ecosystem: Pulse, Analytics, LETHE, PX-Δ1, ΔX Tracker, IntentEX and future noetic systems." />
 
   <style>
     :root {
       --bg: #05060a;
-      --bg-soft: #0b0d14;
-      --fg: #f5f5f5;
-      --muted: #a3a7b3;
-      --gold: #f5c76a;
-      --violet: #6e63ff;
-      --border: #1b1f2b;
+      --bg-elevated: #0b0e16;
+      --fg: #f5f5f7;
+      --muted: #9da1b2;
+      --accent-gold: #f6c56c;
+      --accent-gold-soft: rgba(246, 197, 108, 0.12);
+      --accent-iris: #6d6bff;
+      --border: #232735;
       --radius-lg: 24px;
-      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.85);
+      --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.6);
       --max-width: 1120px;
-      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.45);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: radial-gradient(circle at top, #111425 0, #05060a 55%, #020308 100%);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #151827 0, #05060a 52%);
-      color: var(--fg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+      display: flex;
+      justify-content: center;
     }
 
     .page {
       min-height: 100vh;
+      width: 100%;
+      max-width: 1280px;
       display: flex;
       flex-direction: column;
+      padding: 16px 16px 32px;
     }
 
-    .wrapper {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.6rem;
+    @media (min-width: 768px) {
+      .page {
+        padding: 28px 32px 40px;
+      }
     }
 
     /* HEADER */
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 6, 10, 0.96),
-        rgba(5, 6, 10, 0.85),
-        transparent
-      );
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 4px 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #2cf5ff 0, #002a3a 40%, #05060a 100%);
+      border: 1px solid rgba(135, 206, 255, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 255, 0.1),
+        0 0 40px rgba(0, 255, 213, 0.4);
+      position: relative;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: inherit;
+      border: 1px solid rgba(5, 245, 255, 0.6);
+      opacity: 0.9;
+    }
+
+    .brand-text-main {
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #e9eaee;
     }
 
     .nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0.8rem 0 0.7rem;
+      gap: 18px;
+      font-size: 13px;
     }
 
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .nav-logo-circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 199, 106, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: var(--gold);
-    }
-
-    .nav-title {
-      font-size: 0.95rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.4rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .nav-links a {
+    .nav-link {
       position: relative;
-      padding-bottom: 0.1rem;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: var(--gold);
-      transition: width 0.18s ease-out;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-links a.active {
-      color: var(--fg);
-    }
-
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      padding: 0.45rem 1.1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 199, 106, 0.35);
-      font-size: 0.8rem;
-      color: var(--gold);
-      background: rgba(245, 199, 106, 0.04);
-      white-space: nowrap;
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        row-gap: 0.4rem;
-      }
-    }
-
-    /* GENERIC SECTIONS */
-
-    section {
-      padding: 3.2rem 0;
-    }
-
-    .section-heading {
-      margin-bottom: 2rem;
-    }
-
-    .section-eyebrow {
-      font-size: 0.75rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
+      padding-bottom: 4px;
       color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .section-title {
-      font-size: 1.35rem;
+      text-decoration: none;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .section-lead {
-      font-size: 0.98rem;
-      color: var(--muted);
-      max-width: 32rem;
-      margin-top: 0.6rem;
+    .nav-link:hover {
+      color: #e5e7f3;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2.4rem;
-      align-items: flex-start;
+    .nav-link.active {
+      color: var(--accent-gold);
     }
 
-    @media (max-width: 900px) {
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-gold), #ff9b6b);
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .nav-cta {
+        display: inline-flex;
       }
     }
 
-    .card {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      padding: 1.5rem 1.4rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .card-header {
-      font-size: 0.78em;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .card-title {
-      font-size: 1.05rem;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
       font-weight: 500;
-      margin-bottom: 0.5rem;
+      border: 1px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+      white-space: nowrap;
     }
 
-    .card-body {
-      font-size: 0.9rem;
-      color: var(--muted);
+    .btn-gold {
+      background: radial-gradient(circle at 20% 0, #fff5d4 0, #f6c56c 32%, #f1993d 100%);
+      color: #311900;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
     }
 
-    .pill-row {
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.85);
+      filter: brightness(1.03);
+    }
+
+    .btn-outline {
+      border-color: rgba(245, 197, 108, 0.7);
+      color: var(--accent-gold);
+      background: radial-gradient(circle at top, rgba(246, 197, 108, 0.09), transparent 55%);
+    }
+
+    .btn-outline:hover {
+      background: radial-gradient(circle at top, rgba(246, 197, 108, 0.18), transparent 60%);
+    }
+
+    /* LAYOUT MAIN */
+
+    main {
+      flex: 1 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.1rem;
+      flex-direction: column;
+      gap: 24px;
     }
 
-    .pill {
-      font-size: 0.78rem;
-      padding: 0.32rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(12, 14, 22, 0.96);
-      color: var(--muted);
+    @media (min-width: 960px) {
+      main {
+        gap: 32px;
+      }
     }
 
-    .pill.gold {
-      border-color: rgba(245, 199, 106, 0.8);
-      color: var(--gold);
-      background: rgba(245, 199, 106, 0.08);
+    .content {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
     }
 
     /* HERO */
 
     .hero {
-      padding: 4.2rem 0 3.4rem;
+      background:
+        radial-gradient(circle at top left, rgba(242, 200, 121, 0.08), transparent 55%),
+        radial-gradient(circle at top right, rgba(109, 107, 255, 0.18), transparent 60%),
+        linear-gradient(145deg, #070812, #05060a 40%, #040714 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: 32px 32px 32px;
+      }
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #c0c3d5;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 30px;
+      line-height: 1.07;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 38px;
+      }
+    }
+
+    .hero-body {
+      max-width: 520px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 20px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-top: 1.8rem;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .btn-solid {
-      background: linear-gradient(135deg, #f5c76a, #f08a3d);
-      color: #05060a;
-      font-weight: 500;
+    .hero-meta {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(201, 205, 223, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      opacity: 0.9;
+    }
+
+    .hero-meta span {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
-      padding: 0.7rem 1.4rem;
-      font-size: 0.9rem;
-      box-shadow: var(--shadow-soft);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
+      background: radial-gradient(circle, #2df4ff, #007bff);
+      box-shadow: 0 0 10px rgba(45, 244, 255, 0.8);
     }
 
-    .btn-solid:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
+    .hero-orbit {
+      position: absolute;
+      right: -40px;
+      bottom: -50px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(109, 107, 255, 0.35);
+      box-shadow: 0 0 120px rgba(109, 107, 255, 0.45);
+      opacity: 0.7;
     }
 
-    .btn-ghost {
-      border-radius: 999px;
-      border: 1px solid rgba(163, 167, 179, 0.6);
-      background: rgba(4, 5, 8, 0.8);
-      color: var(--muted);
-      padding: 0.7rem 1.4rem;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.15s ease-out, color 0.15s ease-out, transform 0.15s ease-out;
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      color: var(--fg);
-      transform: translateY(-1px);
+    .hero-orbit::before {
+      inset: 20px;
+      border: 1px dashed rgba(139, 164, 255, 0.25);
     }
 
-    /* SYSTEM GRID */
-
-    .systems-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.2rem;
+    .hero-orbit::after {
+      inset: 60px;
+      background: radial-gradient(circle, rgba(14, 255, 214, 0.9), rgba(9, 39, 71, 0.1));
+      box-shadow: 0 0 70px rgba(0, 255, 214, 0.8);
+      opacity: 0.8;
     }
 
-    @media (max-width: 900px) {
-      .systems-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 600px) {
+      .hero-orbit {
+        opacity: 0.25;
+        right: -80px;
+        bottom: -72px;
       }
     }
 
-    .system-card {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      padding: 1.2rem 1.1rem;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 140px;
+    /* PORTAL SNAPSHOT CARD */
+
+    .section {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
     }
 
-    .system-tag {
-      font-size: 0.75rem;
+    .section-heading {
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background:
+        radial-gradient(circle at top left, rgba(247, 202, 126, 0.05), transparent 60%),
+        linear-gradient(145deg, var(--bg-elevated), #05060a);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 18px 18px 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 22px 24px 22px;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #e5e7f5;
+    }
+
+    .card-tag {
+      font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--accent-gold);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(246, 197, 108, 0.5);
+      background: radial-gradient(circle at top, var(--accent-gold-soft), transparent 60%);
+      white-space: nowrap;
+    }
+
+    .card-body {
+      display: grid;
+      gap: 12px;
+      font-size: 13px;
       color: var(--muted);
-      margin-bottom: 0.4rem;
     }
 
-    .system-name {
-      font-size: 0.98rem;
-      font-weight: 500;
-      margin-bottom: 0.35rem;
+    .card-body p {
+      line-height: 1.65;
     }
 
-    .system-body {
-      font-size: 0.86rem;
-      color: var(--muted);
+    .card-label {
+      font-weight: 600;
+      color: #e3e6f4;
     }
 
-    .system-link {
-      margin-top: 0.8rem;
-      font-size: 0.8rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+    .card-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    .card-list span::before {
+      content: "• ";
+      color: rgba(244, 197, 108, 0.85);
     }
 
     /* FOOTER */
 
     footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 2.4rem 0 2.8rem;
-      font-size: 0.86rem;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 24px auto 0;
+      border-top: 1px solid rgba(58, 63, 86, 0.8);
+      padding-top: 18px;
+      font-size: 11px;
       color: var(--muted);
-      margin-top: 1.6rem;
     }
 
-    .footer-row {
+    .footer-inner {
       display: flex;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    @media (max-width: 720px) {
-      footer {
-        padding-bottom: 3.2rem;
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
       }
-      .footer-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    }
+
+    .footer-contact span {
+      display: block;
+    }
+
+    .footer-contact a {
+      color: #e8ebff;
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="page">
-
     <!-- HEADER -->
-    <header>
-      <div class="wrapper">
-        <nav class="nav">
-          <div class="nav-brand">
-            <div class="nav-logo-circle">⦿</div>
-            <div class="nav-title">KRYONIS PORTAL</div>
-          </div>
-          <div class="nav-links">
-            <a href="https://kryonis.global">Global</a>
-            <a href="https://kryonis.global/#studio">Studio</a>
-            <a href="#top" class="active">Portal</a>
-          </div>
-          <a class="nav-cta" href="#access">Request access</a>
-        </nav>
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <div class="brand-text-main">KRYONIS PORTAL</div>
+        </div>
       </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#">Global</a>
+        <a class="nav-link" href="#">Studio</a>
+        <a class="nav-link active" href="#">Portal</a>
+        <a class="btn btn-outline nav-cta" href="#request-access">Request access</a>
+      </nav>
     </header>
 
-    <main id="top">
+    <main>
+      <div class="content">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="portal-hero-title">
+          <div class="hero-kicker">Sovereign Operations Interface</div>
+          <h1 class="hero-title" id="portal-hero-title">
+            KRYONIS<br />
+            INTELLIGENCE<br />
+            PORTAL
+          </h1>
+          <p class="hero-body">
+            The operational entry point into the KRYONIS ecosystem — a unified
+            interface for PULSE, ANALYTICS, LETHE, PX-Δ1, ΔX TRACKER, INTENTEX
+            and future noetic systems. Designed as a government-grade dashboard
+            for sovereign operators, not an app.
+          </p>
 
-      <!-- HERO -->
-      <section class="hero">
-        <div class="wrapper">
-          <div class="grid-2">
+          <div class="hero-actions">
+            <a class="btn btn-gold" id="enter-portal" href="#enter-portal">
+              Enter KRYONIS PORTAL
+            </a>
+            <a class="btn btn-outline" id="request-access" href="#request-access">
+              Request a sovereign account
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <span>Live field architecture</span>
+            <span>Operational readiness protocol</span>
+          </div>
+
+          <div class="hero-orbit" aria-hidden="true"></div>
+        </section>
+      </div>
+
+      <!-- PORTAL SNAPSHOT (tekstikaart, mitte live Pulse) -->
+      <section class="section">
+        <div class="section-heading">Portal Snapshot</div>
+        <article class="card" aria-labelledby="portal-snapshot-title">
+          <header class="card-header">
+            <h2 class="card-title" id="portal-snapshot-title">Role &amp; scope</h2>
+            <div class="card-tag">Front-line interface</div>
+          </header>
+          <div class="card-body">
+            <p>
+              <span class="card-label">Role:</span>
+              the KRYONIS PORTAL acts as the front-line interface for KRYONIS
+              operational systems — the point where sovereign operators,
+              partner agencies and high-integrity institutions connect to the
+              KRYONIS field.
+            </p>
             <div>
-              <div class="section-eyebrow">SOVEREIGN OPERATIONS INTERFACE</div>
-              <h1 style="font-size: clamp(2.1rem, 3.3vw, 2.6rem); letter-spacing: 0.16em; text-transform: uppercase; margin: 0.6rem 0 1.2rem;">
-                KRYONIS<br />INTELLIGENCE PORTAL
-              </h1>
-              <p style="font-size:1.02rem; color:var(--muted); max-width:32rem;">
-                The operational entry point into the KRYONIS ecosystem —  
-                a unified interface for PULSE, ANALYTICS, LETHE, PX-Δ1, ΔX TRACKER,
-                INTENTEX and future noetic systems.
-              </p>
-              <div class="hero-actions">
-                <!-- TODO: Replace href with your live portal app URL if different -->
-                <a class="btn-solid" href="https://portal.kryonis.global/">
-                  Enter KRYONIS PORTAL
-                </a>
-                <a class="btn-ghost" href="#access">
-                  Request a sovereign account
-                </a>
+              <span class="card-label">Primary modules:</span>
+              <div class="card-list">
+                <span>KRYONIS PULSE — live resonance and field climate.</span>
+                <span>K-Analytics — pattern detection, anomaly mapping and meta-trends.</span>
+                <span>LETHE — memory governance, secure cognitive offloading.</span>
+                <span>PX-Δ1 — cognitive surveillance grid.</span>
+                <span>ΔX Tracker — deviation &amp; divergence monitoring.</span>
+                <span>IntentEX — sovereign intent licensing system.</span>
               </div>
             </div>
-
-            <aside class="card">
-              <div class="card-header">PORTAL SNAPSHOT</div>
-              <div class="card-body" style="font-size:0.9rem;">
-                <p><strong>Role:</strong> Front-line interface for KRYONIS operational systems.</p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Primary modules:</strong> KRYONIS PULSE, ANALYTICS, LETHE,
-                  PX-Δ1, ΔX TRACKER, INTENTEX.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Audience:</strong> Sovereign institutions, research agencies,
-                  high-integrity operators in bioeconomy, AI, space and civilizational
-                  projects.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Security tier:</strong> Sovereign-grade. Every account is
-                  individually curated. No open registration, no public token sale.
-                </p>
-              </div>
-            </aside>
           </div>
-        </div>
+        </article>
       </section>
-
-      <!-- SYSTEMS GRID -->
-      <section>
-        <div class="wrapper">
-          <div class="section-heading">
-            <div class="section-eyebrow">SYSTEMS</div>
-            <h2 class="section-title">Operational modules</h2>
-            <p class="section-lead">
-              The PORTAL aggregates all active and forthcoming KRYONIS modules into a single,
-              coherent interface. Each tile below represents a live or reserved system.
-            </p>
-          </div>
-
-          <div class="systems-grid">
-            <div class="system-card">
-              <div>
-                <div class="system-tag">PULSE</div>
-                <div class="system-name">KRYONIS PULSE</div>
-                <div class="system-body">
-                  Daily resonance &amp; emotional state journal.  
-                  Structured inputs for Proof-of-Coherence analysis and personal field hygiene.
-                </div>
-              </div>
-              <div class="system-link">OPEN MODULE →</div>
-            </div>
-
-            <div class="system-card">
-              <div>
-                <div class="system-tag">ANALYTICS</div>
-                <div class="system-name">K-ANALYTICS</div>
-                <div class="system-body">
-                  Time-series insight into collective coherence, flows, and structural
-                  tensions across nodes and cohorts.
-                </div>
-              </div>
-              <div class="system-link">VIEW DASHBOARDS →</div>
-            </div>
-
-            <div class="system-card">
-              <div>
-                <div class="system-tag">LETHE</div>
-                <div class="system-name">LETHE</div>
-                <div class="system-body">
-                  Cognitive hygiene and intentional forgetting.  
-                  Protocols for clearing, resetting and re-aligning attention.
-                </div>
-              </div>
-              <div class="system-link">ENTER ENVIRONMENT →</div>
-            </div>
-
-            <div class="system-card">
-              <div>
-                <div class="system-tag">PX-Δ1</div>
-                <div class="system-name">PX-Δ1 MONITORING</div>
-                <div class="system-body">
-                  Pattern extraction and anomaly detection across complex, multi-layer
-                  ecosystems and signal fields.
-                </div>
-              </div>
-              <div class="system-link">ACCESS CONSOLE →</div>
-            </div>
-
-            <div class="system-card">
-              <div>
-                <div class="system-tag">ΔX</div>
-                <div class="system-name">ΔX TRACKER</div>
-                <div class="system-body">
-                  Tracking of discontinuities, shocks and non-linear events across
-                  economic, ecological and social spaces.
-                </div>
-              </div>
-              <div class="system-link">OPEN MAPS →</div>
-            </div>
-
-            <div class="system-card">
-              <div>
-                <div class="system-tag">INTENTEX</div>
-                <div class="system-name">INTENTEX</div>
-                <div class="system-body">
-                  Intent licensing and conscious economic orchestration.  
-                  Interfaces for high-fidelity commitment and value routing.
-                </div>
-              </div>
-              <div class="system-link">ENTER INTENTEX →</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ARCHITECTURE -->
-      <section>
-        <div class="wrapper">
-          <div class="section-heading">
-            <div class="section-eyebrow">ARCHITECTURE</div>
-            <h2 class="section-title">Portal in the KRYONIS stack</h2>
-            <p class="section-lead">
-              The PORTAL is the operational edge of the KRYONIS stack, sitting between
-              field experience and the deep noetic architecture defined in KRYONIS.GLOBAL
-              and the INTELLIGENCE STUDIO.
-            </p>
-          </div>
-
-          <div class="grid-2">
-            <div class="card">
-              <div class="card-header">POSITION IN THE SYSTEM</div>
-              <div class="card-body">
-                <p>
-                  <strong>KRYONIS.GLOBAL</strong> defines the civilizational architecture:
-                  GCI, PoC, noöcratic governance and node-based sovereignty.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>KRYONIS INTELLIGENCE STUDIO</strong> authors the formal doctrine:
-                  strategic papers, whitebooks and analytical compendia.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>KRYONIS PORTAL</strong> operationalises these architectures into
-                  lived tools: dashboards, journals, interventions and real-time systems.
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">DESIGN PRINCIPLES</div>
-              <div class="card-body">
-                <p><strong>Resonance-first:</strong> Every interaction contributes to the field of coherence.</p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Sovereign by design:</strong> No extraction business models, no
-                  dark patterns, no opaque data brokerage.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Operator-centric:</strong> Built for the people who carry the
-                  burden of real-world decisions — ministers, scientists, strategists,
-                  and field leaders.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ACCESS / CONTACT -->
-      <section id="access">
-        <div class="wrapper">
-          <div class="section-heading">
-            <div class="section-eyebrow">ACCESS &amp; ONBOARDING</div>
-            <h2 class="section-title">Sovereign accounts only</h2>
-            <p class="section-lead">
-              The KRYONIS PORTAL is not a mass-market product. Access is granted through
-              a deliberate, relational process.
-            </p>
-          </div>
-
-          <div class="grid-2">
-            <div class="card">
-              <div class="card-header">ELIGIBLE PARTICIPANTS</div>
-              <div class="card-body">
-                <p><strong>Sovereign institutions:</strong> ministries, national councils, public banks.</p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Research agencies:</strong> institutes in bioeconomy, AI, complex systems, climate and space.
-                </p>
-                <p style="margin-top:0.6rem;">
-                  <strong>Strategic partners:</strong> infrastructure operators, critical industries and foundations operating
-                  on 25- to 100-year horizons.
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">INITIATE A BRIEFING</div>
-              <div class="card-body">
-                <p>
-                  To explore access to the KRYONIS PORTAL and its modules, initiate a
-                  confidential briefing with the KRYONIS team.
-                </p>
-                <p style="margin-top:0.8rem;">
-                  Include:
-                </p>
-                <ul style="margin-top:0.4rem; padding-left:1rem; font-size:0.9rem; color:var(--muted);">
-                  <li>Who you are and what institution or initiative you represent.</li>
-                  <li>Your current mandate and time horizon (5 / 25 / 100+ years).</li>
-                  <li>Domains where you seek systemic coherence or new architectures.</li>
-                </ul>
-                <p style="margin-top:0.8rem; font-size:0.9rem;">
-                  Primary contact:<br />
-                  <strong>hq@kryonis.global</strong>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PULSE LIVE SECTION -->
-      <section id="pulse-live">
-        <div class="wrapper">
-          <div class="section-heading">
-            <div class="section-eyebrow">LIVE FIELD</div>
-            <h2 class="section-title">KRYONIS Pulse — Live resonance snapshot</h2>
-            <p class="section-lead">
-              A real-time view of the current resonance field inside the KRYONIS ecosystem.
-            </p>
-          </div>
-          <div style="max-width: 420px; margin: 2.5rem auto 0;">
-            <iframe
-              src="pulse-live.html"
-              style="
-                width: 100%;
-                height: 420px;
-                border: none;
-                border-radius: 22px;
-                overflow: hidden;
-                background: transparent;
-                display: block;
-              "
-              loading="lazy">
-            </iframe>
-          </div>
-        </div>
-      </section>
-
     </main>
 
     <!-- FOOTER -->
     <footer>
-      <div class="wrapper">
-        <div style="
-          height:1px;
-          background:linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
-          margin-bottom:2.2rem;
-        "></div>
-        <div class="footer-row">
-          <div style="line-height:1.55;">
-            <div style="opacity:0.85; font-weight:500;">Get in touch:</div>
-            <div style="opacity:0.85;">hq@kryonis.global</div>
-          </div>
-          <div style="line-height:1.55; text-align:right; opacity:0.8;">
-            © KRYONIS Sovereign Systems Limited · 2025<br />
-            Suite 4002A, 40/F, Tower 1, Lippo Centre<br />
-            89 Queensway, Hong Kong SAR
-          </div>
+      <div class="footer-inner">
+        <div class="footer-contact">
+          <span>Get in touch:</span>
+          <a href="mailto:hq@kryonis.global">hq@kryonis.global</a>
+        </div>
+
+        <div class="footer-legal">
+          © KRYONIS Sovereign Systems Limited · 2025<br />
+          Suite 4002A, 40/F, Tower 1, Lippo Centre<br />
+          89 Queensway, Hong Kong SAR
         </div>
       </div>
     </footer>
-
   </div>
-
-  <!-- Always start at top on refresh -->
-  <script>
-    window.onbeforeunload = function () {
-      window.scrollTo(0, 0);
-    };
-  </script>
 </body>
 </html>
